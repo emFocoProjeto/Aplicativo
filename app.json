@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "emfoco",
+    "slug": "emfoco",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "orientation": "portrait",
+    "icon": "./src/assets/image.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/image.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBvx6yEfGsbnW9wFa_HFfCT4Guk4mtpVgc"
+        }
+      },
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/image.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.emfoco.notificador"
+    },
+    "web": {
+      "favicon": "./src/assets/image.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b467ec16-d6b4-42c9-889b-659c2ada1ecb"
+      }
+    },
+    "newArchEnabled": true
+  }
+}
