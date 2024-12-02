@@ -1,5 +1,4 @@
-//const url = "https://emfocoapi.onrender.com/api";
-const url =  "https://api-em-foco-mmw86ms3k-emfocoprojetos-projects.vercel.app/api"
+const url = "https://api-emfoco.onrender.com/api";
 
 const getUserAuthenticated = async (user) => {
   try{

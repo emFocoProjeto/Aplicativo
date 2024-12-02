@@ -11,7 +11,7 @@ export default function Autenticar({ navigation }) {
   const [errorPassword, setErrorPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login, user } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
     if (validar()) {
@@ -22,11 +22,8 @@ export default function Autenticar({ navigation }) {
         };
         setIsLoading(true);
         await login(useForm);
-       
       } catch (error) {
-        Alert.alert('Verifique se o email e a senha estão corretos!');
         setIsLoading(false);
-        console.log(error);
       } finally {
         setIsLoading(false);
       }

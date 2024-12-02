@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -35,6 +36,7 @@ export default function Cadastro({ navigation }) {
         await postUser(newUser);
         Alert.alert('Cadastro realizado com sucesso!');
         navigation.navigate('Autenticar')
+        
       } catch (error) {
         Alert.alert('Ocorreu um erro ao cadastrar. Tente novamente.');
         console.error(error);

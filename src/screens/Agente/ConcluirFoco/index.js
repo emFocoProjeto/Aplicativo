@@ -43,7 +43,7 @@ export default function ConcluirFoco({ route, navigation }) {
         try {
             const updateData = {
                 acao: acao,
-                author: user.name,
+                agente: user.name,
             };
             await updateFoco(route.params.id, updateData);
             Alert.alert("Sucesso", "Foco alterado com sucesso!");
@@ -54,9 +54,9 @@ export default function ConcluirFoco({ route, navigation }) {
     };
 
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
         <View style={styles.container}>
-            <Text style={styles.title}>Remover Foco</Text>
+            <Text style={styles.title}>Resolver Foco</Text>
             <View style={styles.form}>
                 <View style={styles.inputWrapper}>
                     <Text style={styles.label}>Mensagem</Text>
@@ -70,12 +70,9 @@ export default function ConcluirFoco({ route, navigation }) {
                     />
                 </View>
 
-                <Image source={{ uri: `https://api-em-foco-mmw86ms3k-emfocoprojetos-projects.vercel.app/api/foco/image/${uri}` }} style={styles.image} />
+                <Image source={{ uri: `https://api-emfoco.onrender.com/api/foco/image/${uri}` }} style={styles.image} />
 
-                <RenderizarMapa  
-                    localizacao={location} 
-                    region={region} 
-                />
+                <RenderizarMapa localizacao={location} region={region} /> 
 
                 <View style={styles.inputWrapper}>
                     <Text style={styles.label}>Ações Executadas:</Text>
@@ -88,20 +85,21 @@ export default function ConcluirFoco({ route, navigation }) {
                         onChangeText={value => setAcao(value)} 
                     />
                 </View>
-
-                <Button 
-                    texto="Enviar"
-                    onPress={() => updateForm()} 
-                    style={styles.buttonEnviar}
-                    textStyle={styles.buttonText}
-                />
-                <Button 
-                    texto="Cancelar"
-                    onPress={() => 
-                        setImageFile(null)
-                    } 
-                    style={styles.buttonCancelar}
-                    textStyle={styles.buttonText} />
+                <View style={styles.buttonWrapper}>
+                    <Button 
+                        texto="Enviar"
+                        onPress={() => updateForm()} 
+                        style={styles.buttonEnviar}
+                        textStyle={styles.buttonText}
+                    />
+                    <Button 
+                        texto="Cancelar"
+                        onPress={() => 
+                            navigation.navigate('Listagem')
+                        } 
+                        style={styles.buttonCancelar}
+                        textStyle={styles.buttonText} />
+                </View>
             </View>
         </View>
         </ScrollView>
@@ -147,21 +145,22 @@ const styles = StyleSheet.create({
         height: 250,
         marginVertical: 16,
     },
-    buttonEnviar: {
+    buttonWrapper: {
+        flexDirection: 'row',
         width: '100%',
-        padding: 12,
-        backgroundColor: '#1351b4',
-        borderRadius: 5,
-        alignItems: 'center',
-        marginBottom: 10,
+        marginTop: 20,
+        justifyContent: 'space-between'
+    },
+    buttonEnviar: {
+        width: '45%',
+        borderRadius: 4,
+        backgroundColor: 'green'
     },
     buttonCancelar: {
-        width: '100%',
-        padding: 8,
-        backgroundColor: '#dc3545',
-        borderRadius: 5,
-        alignItems: 'center',
-    }, 
+        width: '45%',
+        borderRadius: 4,
+        backgroundColor: 'red'
+    },
     buttonText: {
         color: '#fff',
         textAlign: 'center',

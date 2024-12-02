@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#fff', flex: 1, paddingBottom: 25, paddingTop: 4 }}>
+    <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
 
           <Pressable
             style={styles.iconTextWrapper}

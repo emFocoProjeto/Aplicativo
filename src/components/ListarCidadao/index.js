@@ -4,12 +4,12 @@ import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function ListaCidadao({ focos }) {
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
             {focos?.map((foco, index) => (
                 <View key={index} style={styles.card}>
                     <View style={styles.cardzinho}>
                         <Image
-                            source={{ uri: `https://api-em-foco-mmw86ms3k-emfocoprojetos-projects.vercel.app/api/foco/image/${foco.image}` }}
+                            source={{ uri: `https://api-emfoco.onrender.com/api/foco/image/${foco.image}` }}
                             style={styles.image}
                         />
                         <Text style={styles.description}>{foco.description}</Text>
@@ -26,9 +26,6 @@ export default function ListaCidadao({ focos }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-    },
     card: {
         width: '100%',
         marginBottom: 16,

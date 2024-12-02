@@ -156,10 +156,10 @@ export default function Notificar() {
                         placeholder="Escreva uma breve descrição"
                         multiline={true}
                         numberOfLines={4}
+                        value={descricao}
                         textAlignVertical="top"
                         onChangeText={value => {
                             setDescricao(value)
-                            console.log(value)
                         }} 
                     />
                 </View>
@@ -220,6 +220,7 @@ export default function Notificar() {
                         texto="Cancelar" 
                         onPress={() => {
                             limparForm()
+                            navigation.navigate('Home')
                         }}
                         style={styles.buttonCancelar} 
                         textStyle={styles.customText} 

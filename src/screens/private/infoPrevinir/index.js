@@ -8,7 +8,7 @@ export default function InfoPrevinir({ navigation }) {
     console.log('clicado');
   }
   return (
-    <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#fff', flex: 1, paddingTop: 4}}>
+    <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#fff', paddingTop: 4, paddingBottom: 15}}>
           <View style={styles.card}>
             <Text style={styles.title}>Prevenção da Dengue</Text>
             <Image style={styles.img} source={require('../../../assets/image-home3.png')} />
