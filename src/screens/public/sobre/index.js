@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
   },
   cardWrapper: {
     width: '100%',
-    marginTop: 10,
+    marginTop: 30,
+    marginBottom: 100,
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',

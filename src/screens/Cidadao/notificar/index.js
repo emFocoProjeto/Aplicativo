@@ -10,10 +10,11 @@ import RenderizarMapa from '../../../components/Mapa';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { postFoco } from '../../../services/apiFoco';
 
-export default function Notificar() {
+export default function Notificar({ navigation }) {
     const { user } = useContext(AuthContext);
 
     const [isSelected, setIsSelected] = useState(false);
+    const [enviando, setEnviando] = useState(false);
     const [location, setLocation] = useState(null);
     const [descricao, setDescricao] = useState('');
     const [author, setAuthor] = useState('');
@@ -69,7 +70,7 @@ export default function Notificar() {
         });
 
         if (canceled) {
-            alert('Operação cancelada', 'Você cancelou a captura de imagem.');
+            Alert.alert('Operação cancelada', 'Você cancelou a captura de imagem.');
         } else {
             const filename = assets[0].uri.substring(assets[0].uri.lastIndexOf('/') + 1);
             const extend = filename.split('.')[1];
@@ -108,6 +109,13 @@ export default function Notificar() {
         }
     };
 
+    function limparForm(){
+        setDescricao('');
+        setLocation(null);
+        setIsSelected(false);
+        setImageFile(null);
+    }
+
     const handleNotificar = async () => {
         if (!descricao || !location || !location.longitude || !location.latitude || !imageFile) {
             Alert.alert('Por favor, preencha todos os campos e adicione a imagem.');
@@ -120,37 +128,34 @@ export default function Notificar() {
         formData.append('description', descricao);
         formData.append('longitude', location.longitude);
         formData.append('latitude', location.latitude);
-        formData.append('cidadao', user.name);
+        formData.append('cidadao', author);
         formData.append('imageFile', {
             uri: imageFile.uri,
             name: imageFile.name,
             type: imageFile.type
         });
+        
+        setEnviando(true);
 
         const result = await postFoco(formData); // Fazendo o post com FormData
-    
+        
         if (result) {
-            alert('Foco enviado com sucesso!');
+            Alert.alert('Foco enviado com sucesso!');
             limparForm()
+            setEnviando(false);
+            navigation.navigate('Listagem')
            
         } else {
             Alert.alert('Erro ao enviar foco. Tente novamente.');
         }
     };
 
-    function limparForm(){
-        setDescricao('');
-        setLocation(null);
-        setIsSelected(false);
-        setImageFile(null);
-    }
-
     return (
         <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1' }}>
             <View style={styles.wrapper}>
-                <Text style={styles.title}>Notificar Foco</Text>
+                <Text style={styles.title}>Notificar foco da dengue</Text>
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.label}>Mensagem</Text>
+                    <Text style={styles.label}>Drescreva:</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="Escreva uma breve descrição"
@@ -167,13 +172,13 @@ export default function Notificar() {
                 <CheckBox
                     title="Capturar minha localização"
                     checkedIcon="check"
-                    size={28}
                     uncheckedIcon="square-o"
                     checkedColor="green"
                     uncheckedColor="red"
                     checked={isSelected}
-                    onPress={() => setIsSelected(!isSelected)} 
-                    containerStyle={{ backgroundColor: 'transparent', borderWidth: 0 }}
+                    onPress={() => setIsSelected(!isSelected)}
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkboxText}
                 />
 
                 <RenderizarMapa localizacao={location} region={region} /> 
@@ -214,7 +219,8 @@ export default function Notificar() {
                         texto="Enviar" 
                         onPress={handleNotificar}
                         style={styles.buttonEnviar} 
-                        textStyle={styles.customText} 
+                        textStyle={styles.customText}
+                        disable={enviando}
                     />
                    <Button
                         texto="Cancelar" 
@@ -245,6 +251,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     },
+    checkboxContainer: {
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      checkboxText: {
+        marginLeft: 20,
+        fontSize: 16,
+      },
     inputWrapper: {
         marginBottom: 20,
         width: '100%',

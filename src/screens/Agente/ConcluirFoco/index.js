@@ -46,7 +46,7 @@ export default function ConcluirFoco({ route, navigation }) {
                 agente: user.name,
             };
             await updateFoco(route.params.id, updateData);
-            Alert.alert("Sucesso", "Foco alterado com sucesso!");
+            Alert.alert("Foco alterado com sucesso!");
             navigation.navigate('Listagem');
         } catch {
             Alert.alert("Erro", "Ocorreu um erro ao alterar o foco.");
@@ -56,18 +56,13 @@ export default function ConcluirFoco({ route, navigation }) {
     return (
         <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
         <View style={styles.container}>
-            <Text style={styles.title}>Resolver Foco</Text>
+            <Text style={styles.title}>Resolver foco da dengue</Text>
             <View style={styles.form}>
                 <View style={styles.inputWrapper}>
-                    <Text style={styles.label}>Mensagem</Text>
-                    <TextInput
-                        style={styles.input}
-                        multiline={true}
-                        numberOfLines={4}
-                        textAlignVertical="top"
-                        value={descricao}
-                        onChangeText={value => setDescricao(value)}
-                    />
+                    <Text style={styles.label}>Descrição</Text>
+                    <Text style={styles.textDescricao}>
+                        {descricao}   
+                    </Text>
                 </View>
 
                 <Image source={{ uri: `https://api-emfoco.onrender.com/api/foco/image/${uri}` }} style={styles.image} />
@@ -116,6 +111,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 16,
+    },
+    textDescricao: {
+
     },
     form: {
         marginVertical: 16,

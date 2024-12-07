@@ -28,6 +28,18 @@ const getAllFoco = async () => {
   }
 }
 
+const getFocosEncontrados = async () => {
+  try{
+    const responseOfAPI = await fetch(`${url}/focoCad`, {
+      cache: "no-cache"
+    });
+    const FocosEncontrados = await responseOfAPI.json();
+    return FocosEncontrados;
+  } catch {
+    return null;
+  }
+}
+
 const getOneFoco = async (id) => {
   try {
       const responseOfApi = await fetch(`${url}/focos/${id}`, {
@@ -57,5 +69,5 @@ const updateFoco = async (id, foco,) =>{
   }
 }
 
-export { getAllFoco, getOneFoco, postFoco, updateFoco };
+export { getAllFoco, getFocosEncontrados, getOneFoco, postFoco, updateFoco };
 

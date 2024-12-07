@@ -6,9 +6,9 @@ import Button from '../../../components/Button';
 export default function Inicio({ navigation }) {
   return (
     <ImageBackground
-    source={require('../../../assets/background-inicio.jpg')}
-    style={styles.background}
-    resizeMode='cover'
+      source={require('../../../assets/background-inicio.jpg')}
+      style={styles.background}
+      resizeMode='cover'
     >
       <Text style={styles.title}>Em Foco!</Text>
       <View style={styles.wrapper}>

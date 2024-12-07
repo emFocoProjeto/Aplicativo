@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Alert,
+  ImageBackground,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -35,8 +36,7 @@ export default function Cadastro({ navigation }) {
       try {
         await postUser(newUser);
         Alert.alert('Cadastro realizado com sucesso!');
-        navigation.navigate('Autenticar')
-        
+        navigation.navigate('Autenticar');
       } catch (error) {
         Alert.alert('Ocorreu um erro ao cadastrar. Tente novamente.');
         console.error(error);
@@ -75,73 +75,88 @@ export default function Cadastro({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.cardcad}>
-        <Text style={styles.titulo}>Cadastrar-se</Text>
-        <InputText
-          placeholder="Nome"
-          onChangeText={value => {
-            setName(value);
-            setErrorName('');
-          }}
-          errorMessage={errorName}
-        />
-        <InputText
-          placeholder="E-mail"
-          onChangeText={value => {
-            setEmail(value);
-            setErrorEmail('');
-          }}
-          keyboardType="email-address"
-          errorMessage={errorEmail}
-        />
-        <InputText
-          placeholder="CPF (somente numeros sem .)"
-          onChangeText={value => {
-            setCpf(value);
-            setErrorCpf('');
-          }}
-          keyboardType="number-pad"
-          returnKeyType="done"
-          errorMessage={errorCpf}
-        />
-        <InputText
-          placeholder="Senha"
-          onChangeText={value => setPassword(value)}
-          errorMessage={errorPassword}
-          secureTextEntry={true}
-        />
+    <ImageBackground
+      source={require('../../../assets/background-inicio.jpg')}
+      style={styles.container}
+      resizeMode="cover"
+    >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.cardcad}>
+          <Text style={styles.titulo}>Cadastre-se</Text>
+          <InputText
+            placeholder="Nome"
+            onChangeText={value => {
+              setName(value);
+              setErrorName('');
+            }}
+            errorMessage={errorName}
+            styleInput={styles.input}
+          />
+          <InputText
+            placeholder="E-mail"
+            onChangeText={value => {
+              setEmail(value);
+              setErrorEmail('');
+            }}
+            keyboardType="email-address"
+            errorMessage={errorEmail}
+            styleInput={styles.input}
+          />
+          <InputText
+            placeholder="CPF (somente numeros sem .)"
+            onChangeText={value => {
+              setCpf(value);
+              setErrorCpf('');
+            }}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            errorMessage={errorCpf}
+            styleInput={styles.input}
+          />
+          <InputText
+            placeholder="Senha"
+            onChangeText={value => setPassword(value)}
+            errorMessage={errorPassword}
+            secureTextEntry={true}
+            styleInput={styles.input}
+          />
 
-        <CheckBox
-          title="Sou um agente de endemia!"
-          checkedIcon="check"
-          uncheckedIcon="square-o"
-          checkedColor="green"
-          uncheckedColor="red"
-          checked={isSelected}
-          onPress={() => setSelected(!isSelected)}
-        />
-        <Button
-          texto="Me cadastrar" 
-          onPress={handleCadastrar} 
-          style={styles.buttongreen} 
-          textStyle={styles.buttonText} 
-        />
-        <Button 
-          texto="Voltar ao inicio" 
-          onPress={() => navigation.navigate('Inicio')}
-          style={styles.buttonred} 
-          textStyle={styles.buttonText} 
-        />
-      </View>
-    </SafeAreaView>
+          <CheckBox
+            title="Sou um agente de endemia!"
+            checkedIcon="check"
+            uncheckedIcon="square-o"
+            checkedColor="green"
+            uncheckedColor="red"
+            checked={isSelected}
+            onPress={() => setSelected(!isSelected)}
+            containerStyle={{
+              backgroundColor: 'transparent', 
+              borderWidth: 0, 
+              marginBottom: 20,
+            }}
+            textStyle={styles.textCheck}
+          />
+          <Button
+            texto="Me cadastrar"
+            onPress={handleCadastrar}
+            style={styles.buttongreen}
+            textStyle={styles.buttonText}
+          />
+          <Button
+            texto="Voltar ao inicio"
+            onPress={() => navigation.navigate('Inicio')}
+            style={styles.buttonred}
+            textStyle={styles.buttonText}
+          />
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -149,29 +164,32 @@ const styles = StyleSheet.create({
   cardcad: {
     width: '100%',
     padding: 20,
-    borderRadius: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   titulo: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#28a745',
     textAlign: 'center',
     marginBottom: 20,
   },
   input: {
-    height: 50,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 15,
     backgroundColor: '#fff',
     fontSize: 16,
+    width: '280'
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    backgroundColor: 'transparent'
   },
   checkbox: {
     marginRight: 10,
@@ -182,14 +200,14 @@ const styles = StyleSheet.create({
   },
   buttongreen: {
     backgroundColor: '#28a745',
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderRadius: 5,
     marginBottom: 10,
     alignItems: 'center',
   },
   buttonred: {
     backgroundColor: '#dc3545',
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderRadius: 5,
     alignItems: 'center',
   },

@@ -30,7 +30,7 @@ export default function Listagem({navigation}) {
         <Text style={styles.text}>Status</Text>
       </View>
       {user.type === 'cidadao' ? (
-        <ListaCidadao focos={focos} />
+        <ListaCidadao focos={focos} fetchFocos={fetchData} />
       ) : (
         <ListaAgente focos={focos} fetchFocos={fetchData} navigation={navigation}/>
       )}

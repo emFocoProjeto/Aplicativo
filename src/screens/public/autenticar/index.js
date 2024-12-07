@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import Button from '../../../components/Button';
-import InputText from '../../../components/InputText';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function Autenticar({ navigation }) {
@@ -49,53 +48,81 @@ export default function Autenticar({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <InputText
+    <ImageBackground
+      source={require('../../../assets/background-inicio.jpg')}
+      style={styles.container}
+      resizeMode='cover' // Corrigido de 'cover1' para 'cover'
+    >
+      <View style={styles.content}>
+        <Text style={styles.title}>Login</Text>
+        <TextInput
           placeholder="E-mail"
+          value={email}
           onChangeText={value => {
             setEmail(value);
             setErrorEmail('');
           }}
           keyboardType="email-address"
-          errorMessage={errorEmail}
+          style={styles.input}
         />
-        <InputText
+        {errorEmail ? <Text style={styles.error}>{errorEmail}</Text> : null}
+
+        <TextInput
           placeholder="Senha"
+          value={password}
           onChangeText={value => setPassword(value)}
-          errorMessage={errorPassword}
           secureTextEntry={true}
+          style={styles.input}
         />
-      <Button
-        texto={isLoading ? "Carregando..." : "Entrar"}
-        onPress={handleLogin}
-        style={styles.buttonBlue} 
-        textStyle={styles.buttonText} 
-        disabled={isLoading}
-      />
-      <Button 
-        texto="Não tenho cadastro!" 
-        onPress={() => navigation.navigate('Cadastro')}
-        style={styles.buttonGreen} 
-        textStyle={styles.buttonText} 
-      />
-    </View>
+        {errorPassword ? <Text style={styles.error}>{errorPassword}</Text> : null}
+
+        <Button
+          texto={isLoading ? "Carregando..." : "Entrar"}
+          onPress={handleLogin}
+          style={styles.buttonBlue} 
+          textStyle={styles.buttonText} 
+          disabled={isLoading}
+        />
+        <Button 
+          texto="Não tenho cadastro!" 
+          onPress={() => navigation.navigate('Cadastro')}
+          style={styles.buttonGreen} 
+          textStyle={styles.buttonText} 
+        />
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '100%',
     width: '100%',
+  },
+  content: {
+    alignItems: 'center',
+    width: '80%',
+    padding: 20,
+    borderRadius: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    overflow: 'hidden', 
+    backdropFilter: 'blur(10px)',
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#28a745',
+  },
+  input: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    marginBottom: 10,
   },
   buttonBlue: {
     width: '100%',
@@ -117,4 +144,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  error: {
+    color: 'red',
+    fontSize: 12,
+    marginBottom: 10,
+  }
 });

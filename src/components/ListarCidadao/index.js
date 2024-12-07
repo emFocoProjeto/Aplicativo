@@ -1,10 +1,16 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-export default function ListaCidadao({ focos }) {
+export default function ListaCidadao({ focos, fetchFocos }) {
+    useFocusEffect(
+        useCallback(() => {
+            fetchFocos();
+        }, [])
+    );
     return (
-        <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
             {focos?.map((foco, index) => (
                 <View key={index} style={styles.card}>
                     <View style={styles.cardzinho}>
@@ -27,7 +33,7 @@ export default function ListaCidadao({ focos }) {
 
 const styles = StyleSheet.create({
     card: {
-        width: '100%',
+        width: '98%',
         marginBottom: 16,
         borderRadius: 8,
         paddingVertical: 16,

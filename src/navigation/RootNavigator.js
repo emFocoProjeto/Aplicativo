@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useContext } from 'react';
+import { StatusBar } from 'react-native';
 import { AuthContext } from '../contexts/AuthContext';
 import AdministradorNavigator from './AdministradorNavigator';
 import AgenteNavigator from './AgenteNavigator';
@@ -11,6 +12,11 @@ export default function RootNavigator() {
 
   return (
     <NavigationContainer>
+        <StatusBar
+          barStyle="dark-content" 
+          translucent={true}
+          backgroundColor="transparent"
+        />
         {user  ? (
         user.type === 'admin' ? <AdministradorNavigator /> :
         user.type === 'agente' ? <AgenteNavigator /> :

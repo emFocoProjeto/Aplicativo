@@ -38,7 +38,7 @@ export default function AgenteNavigator() {
 						headerRight: () => (
 							<Image
 								source={require('../assets/logo.png')}
-								style={{ width: 40, height: 40, marginRight: 10 }}
+								style={{ width: 35, height: 35, marginRight: 10 }}
 							/>
 						),
 					}}

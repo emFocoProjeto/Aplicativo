@@ -11,7 +11,7 @@ export default function ListaAgente({ focos, fetchFocos, navigation }) {
     );
 
     return (
-        <ScrollView contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} contentContainerStyle={{ width: '100%', alignItems: 'center', backgroundColor: '#ecf0f1', paddingBottom: 25, paddingTop: 4 }}>
             {focos?.map((foco, index) => (
                 <View key={index} style={styles.card}>
                     <View style={styles.cardzinho}>
@@ -41,7 +41,7 @@ export default function ListaAgente({ focos, fetchFocos, navigation }) {
 
 const styles = StyleSheet.create({
     card: {
-        width: '100%',
+        width: '98%',
         marginBottom: 16,
         borderRadius: 8,
         paddingVertical: 16,
