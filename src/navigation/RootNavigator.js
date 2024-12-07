@@ -10,20 +10,34 @@ import CidadaoNavigator from './CidadaoNavigator';
 export default function RootNavigator() {
   const { user } = useContext(AuthContext);
 
+  let Navigator;
+  if (user) {
+    switch (user.type) {
+      case 'admin':
+        Navigator = AdministradorNavigator;
+        break;
+      case 'agente':
+        Navigator = AgenteNavigator;
+        break;
+      case 'cidadao':
+        Navigator = CidadaoNavigator;
+        break;
+      default:
+        Navigator = AuthNavigator;
+        break;
+    }
+  } else {
+    Navigator = AuthNavigator;
+  }
+
   return (
     <NavigationContainer>
-        <StatusBar
-          barStyle="dark-content" 
-          translucent={true}
-          backgroundColor="transparent"
-        />
-        {user  ? (
-        user.type === 'admin' ? <AdministradorNavigator /> :
-        user.type === 'agente' ? <AgenteNavigator /> :
-        <CidadaoNavigator />
-        ) : (
-        <AuthNavigator />
-        )}
+      <StatusBar
+        barStyle="dark-content"
+        translucent={true}
+        backgroundColor="transparent"
+      />
+      <Navigator />
     </NavigationContainer>
   );
 }
